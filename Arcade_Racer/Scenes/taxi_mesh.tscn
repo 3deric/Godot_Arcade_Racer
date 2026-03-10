@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1v6cmup4mmig"]
+
+[ext_resource type="PackedScene" uid="uid://btvits2vmcyuq" path="res://Meshes/taxi.glb" id="1_es1r6"]
+
+[node name="taxi" instance=ExtResource("1_es1r6")]
+
+[node name="wheel-front-right" parent="." index="1"]
+visible = false
+
+[node name="wheel-front-left" parent="." index="2"]
+visible = false
+
+[node name="wheel-back-left" parent="." index="3"]
+visible = false
+
+[node name="wheel-back-right" parent="." index="4"]
+visible = false
