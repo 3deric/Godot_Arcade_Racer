@@ -28,8 +28,8 @@ size = Vector2(50, 50)
 subdivide_width = 4
 subdivide_depth = 4
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tumq0"]
-bounce = 0.2
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6phgx"]
+bounce = 0.25
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tumq0"]
 
@@ -71,7 +71,7 @@ material_override = SubResource("StandardMaterial3D_wqkje")
 mesh = SubResource("PlaneMesh_51e2h")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_tumq0")
+physics_material_override = SubResource("PhysicsMaterial_6phgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
@@ -87,6 +87,7 @@ mesh = SubResource("SphereMesh_6phgx")
 skeleton = NodePath("../MeshInstance3D2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D7"]
+physics_material_override = SubResource("PhysicsMaterial_6phgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D7/StaticBody3D"]
 shape = SubResource("SphereShape3D_6phgx")
@@ -97,6 +98,7 @@ material_override = SubResource("StandardMaterial3D_0f350")
 mesh = SubResource("BoxMesh_tumq0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+physics_material_override = SubResource("PhysicsMaterial_6phgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
 shape = SubResource("BoxShape3D_tumq0")
@@ -108,6 +110,7 @@ mesh = SubResource("BoxMesh_tumq0")
 skeleton = NodePath("../MeshInstance3D4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5"]
+physics_material_override = SubResource("PhysicsMaterial_6phgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D"]
 shape = SubResource("BoxShape3D_tumq0")
@@ -119,6 +122,7 @@ mesh = SubResource("BoxMesh_tumq0")
 skeleton = NodePath("../MeshInstance3D3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D4"]
+physics_material_override = SubResource("PhysicsMaterial_6phgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D"]
 shape = SubResource("BoxShape3D_tumq0")
@@ -130,6 +134,7 @@ mesh = SubResource("BoxMesh_tumq0")
 skeleton = NodePath("../MeshInstance3D3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D6"]
+physics_material_override = SubResource("PhysicsMaterial_6phgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D6/StaticBody3D"]
 shape = SubResource("BoxShape3D_tumq0")
@@ -141,6 +146,7 @@ mesh = SubResource("BoxMesh_tumq0")
 skeleton = NodePath("../MeshInstance3D2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+physics_material_override = SubResource("PhysicsMaterial_6phgx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
 shape = SubResource("BoxShape3D_tumq0")
