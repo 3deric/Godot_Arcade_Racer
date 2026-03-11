@@ -1,16 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://cuu7ypqnv277b"]
+[gd_scene load_steps=17 format=4 uid="uid://cuu7ypqnv277b"]
 
 [ext_resource type="Script" uid="uid://d3wkpajtcyfyg" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://bxne5omajk1wa" path="res://Scenes/car.tscn" id="2_cvnsp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cvnsp"]
-radius = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_6t5aa"]
-
-[sub_resource type="Curve" id="Curve_cvnsp"]
-_data = [Vector2(0.003389828, 0), 0.0, 0.0, 0, 0, Vector2(0.05423729, 0.9820443), -0.11210496, -0.11210496, 0, 0, Vector2(1, 0), -3.7714777, 0.0, 0, 0]
-point_count = 3
+radius = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hp1r8"]
 resource_name = "car_chrome"
@@ -351,13 +345,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kak1s")
 
-[sub_resource type="SphereMesh" id="SphereMesh_cvnsp"]
+[sub_resource type="SphereMesh" id="SphereMesh_6t5aa"]
+
+[sub_resource type="Curve" id="Curve_cvnsp"]
+_data = [Vector2(0.003389828, 0), 0.0, 0.0, 0, 0, Vector2(0.05423729, 0.9820443), -0.11210496, -0.11210496, 0, 0, Vector2(1, 0), -3.7714777, 0.0, 0, 0]
+point_count = 3
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_cvnsp")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9895215, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 gravity_scale = 5.0
 angular_damp = 15.0
 
@@ -367,9 +365,42 @@ shape = SubResource("SphereShape3D_cvnsp")
 [node name="Car" type="Node3D" parent="."]
 
 [node name="RayCast3D" type="RayCast3D" parent="Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02251646, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022516489, 0)
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Car"]
+[node name="CarBodyMesh" type="Node3D" parent="."]
+
+[node name="car" parent="CarBodyMesh" instance=ExtResource("2_cvnsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.057667017, 0)
+
+[node name="CarBaseMesh" type="Node3D" parent="."]
+
+[node name="car_wheel_rl" type="MeshInstance3D" parent="CarBaseMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045122266, 0)
+mesh = SubResource("ArrayMesh_vgqql")
+skeleton = NodePath("")
+
+[node name="car_wheel_rr" type="MeshInstance3D" parent="CarBaseMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045122266, 0)
+mesh = SubResource("ArrayMesh_fkybt")
+skeleton = NodePath("")
+
+[node name="steering_fr" type="Node3D" parent="CarBaseMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.891)
+
+[node name="car_wheel_fr" type="MeshInstance3D" parent="CarBaseMesh/steering_fr"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.045122266, -0.891)
+mesh = SubResource("ArrayMesh_cvnsp")
+skeleton = NodePath("")
+
+[node name="steering_fl" type="Node3D" parent="CarBaseMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.891)
+
+[node name="car_wheel_fl" type="MeshInstance3D" parent="CarBaseMesh/steering_fl"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.045122266, -0.891)
+mesh = SubResource("ArrayMesh_6t5aa")
+skeleton = NodePath("")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="CarBaseMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44471717, -1.4776224)
 emitting = false
 amount = 64
@@ -384,38 +415,9 @@ initial_velocity_max = 2.0
 scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_cvnsp")
 
-[node name="car_wheel_rl" type="MeshInstance3D" parent="Car"]
-mesh = SubResource("ArrayMesh_vgqql")
-skeleton = NodePath("")
+[node name="CameraRoot" type="Node3D" parent="."]
 
-[node name="car_wheel_rr" type="MeshInstance3D" parent="Car"]
-mesh = SubResource("ArrayMesh_fkybt")
-skeleton = NodePath("")
-
-[node name="steering_fr" type="Node3D" parent="Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.891)
-
-[node name="car_wheel_fr" type="MeshInstance3D" parent="Car/steering_fr"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.891)
-mesh = SubResource("ArrayMesh_cvnsp")
-skeleton = NodePath("")
-
-[node name="steering_fl" type="Node3D" parent="Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.891)
-
-[node name="car_wheel_fl" type="MeshInstance3D" parent="Car/steering_fl"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.891)
-mesh = SubResource("ArrayMesh_6t5aa")
-skeleton = NodePath("")
-
-[node name="WiggleOffset" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WiggleOffset"]
-visible = false
-mesh = SubResource("SphereMesh_cvnsp")
-skeleton = NodePath("")
-
-[node name="CarMesh" type="Node3D" parent="."]
-
-[node name="car" parent="CarMesh" instance=ExtResource("2_cvnsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.057667017, 0)
+[node name="Camera3D" type="Camera3D" parent="CameraRoot"]
+transform = Transform3D(-0.6034723, 0.59650385, -0.52915424, 2.9802322e-08, 0.663613, 0.7480761, 0.7973839, 0.45144325, -0.40047207, -4.0674677, 6.794157, -2.757611)
+projection = 1
+size = 13.235
