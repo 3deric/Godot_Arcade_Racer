@@ -1,6 +1,6 @@
 extends Node3D
 
-const SPHERE_OFFSET : Vector3 = Vector3(0.0, -1.5, 0.0)
+const SPHERE_OFFSET : Vector3 = Vector3(0.0, -1.0, 0.0)
 
 var acceleration : float = 65.0
 var steering : float = 21.0
