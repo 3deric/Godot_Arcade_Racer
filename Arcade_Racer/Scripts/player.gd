@@ -43,9 +43,11 @@ func _physics_process(delta: float) -> void:
 	xform = car.global_transform
 	car.transform.origin = rigid_body.transform.origin + SPHERE_OFFSET
 	if ray_ground.is_colliding():
-		rigid_body.apply_central_force(car.global_transform.basis.z * input.y * acceleration)
-		car.basis = _set_car_up_direction(ray_ground.get_collision_normal())
-		car_up_direction = lerp(car_up_direction, car.global_basis.y, delta * 8.0)
+		var normal = ray_ground.get_collision_normal()
+		if normal.dot(Vector3.UP) > 0.5:
+			rigid_body.apply_central_force(car.global_transform.basis.z * input.y * acceleration)
+			car.basis = _set_car_up_direction(ray_ground.get_collision_normal())
+			car_up_direction = lerp(car_up_direction, car.global_basis.y, delta * 8.0)
 	else:
 		car_up_direction = lerp(car_up_direction, Vector3.UP, delta * 8.0)
 	_wiggle_node(car_body_mesh, delta)
